@@ -25,4 +25,12 @@
 
 <h1>Hello world from mustache template!</h1>
 
-<p>{{text}}</p>
+<h5>List of all notifications</h5>
+<hr>
+
+{{#notifications}}
+    <p>{{notificationtext}}</p>
+{{/notifications}}
+
+<hr>
+<input type="button" value="Add New Notificaion" class="btn btn-outline-primary" onclick="location.href='{{editurl}}'">

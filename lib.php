@@ -28,5 +28,5 @@
 
 function local_notification_before_footer() {
     // Add a notification of some kind.
-    \core\notification::add('a test notification from lib.php file', \core\output\notification::NOTIFY_WARNING);
+    \core\notification::add('A notification from the local notification plugin', \core\output\notification::NOTIFY_WARNING);
 }
