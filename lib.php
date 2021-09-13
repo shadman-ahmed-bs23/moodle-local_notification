@@ -42,7 +42,7 @@ function local_notification_before_footer() {
 
     $sql = "SELECT ln.id, ln.notificationtext, ln.notificationtype 
             FROM {local_notification} ln 
-            left outer join {local_notification_read} lnr ON ln.id = lnr.notification_id 
+            LEFT OUTER JOIN {local_notification_read} lnr ON ln.id = lnr.notification_id 
             WHERE lnr.userid <> :userid 
             OR lnr.userid IS NULL";
     $params = [

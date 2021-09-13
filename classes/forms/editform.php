@@ -41,11 +41,11 @@ class editform extends moodleform {
         // notification text.
         $mform->addElement('text', 'notificationtext', get_string('notificationtext', 'local_notification'));
         $mform->setType('notificationtext', PARAM_NOTAGS);
-        $mform->setDefault('notificationtext', 'Default notification');
+        $mform->setDefault('notificationtext', get_string('defaultnotification', 'local_notification'));
 
         // notification type.
 
-        // Select Options.
+        // Select Options of notification type.
         $choices = array();
         $choices['0'] = \core\output\notification::NOTIFY_WARNING;
         $choices['1'] = \core\output\notification::NOTIFY_SUCCESS;

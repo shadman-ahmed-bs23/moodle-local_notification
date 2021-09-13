@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Language File for this plugin.
+ * String File for this plugin.
  *
  * @package    local_notification
  * @category   local
@@ -26,3 +26,4 @@
 $string['pluginname'] = 'notification';
 $string['notificationtext'] = 'Notification Text';
 $string['notificationtype'] = 'Notification Type';
+$string['defaultnotification'] = 'Default Notification Text';
