@@ -27,6 +27,24 @@
  */
 
 function local_notification_before_footer() {
+
+    global $DB;
+
+    $notifications = $DB->get_records('local_notification');
+
+    foreach ($notifications as $notification) {
+        $type = \core\output\notification::NOTIFY_ERROR;
+        if ($notification->notificationtype === '0') {
+            $type = \core\output\notification::NOTIFY_WARNING;
+        }
+        if ($notification->notificationtype === '1') {
+            $type = \core\output\notification::NOTIFY_SUCCESS;
+        }
+        if ($notification->notificationtype === '2') {
+            $type = \core\output\notification::NOTIFY_INFO;
+        }
+        \core\notification::add($notification->notificationtext, $type);
+    }
     // Add a notification of some kind.
-    \core\notification::add('A notification from the local notification plugin', \core\output\notification::NOTIFY_WARNING);
+
 }
