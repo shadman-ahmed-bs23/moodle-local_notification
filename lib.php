@@ -20,18 +20,35 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
+ *
  * @package    local_notification
  * @category   local
  * @copyright  2021 Shadman Ahmed
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Before footer hook for showing notification.
+ *
+ * @return void
+ * @throws dml_exception
+ */
+
 function local_notification_before_footer() {
 
-    global $DB;
+    global $DB, $USER;
 
-    $notifications = $DB->get_records('local_notification');
+    //$notifications = $DB->get_records('local_notification');
 
+    $sql = "SELECT ln.id, ln.notificationtext, ln.notificationtype 
+            FROM {local_notification} ln 
+            left outer join {local_notification_read} lnr ON ln.id = lnr.notification_id 
+            WHERE lnr.userid <> :userid 
+            OR lnr.userid IS NULL";
+    $params = [
+        'userid' => $USER->id,
+    ];
+    $notifications = $DB->get_records_sql($sql, $params);
     foreach ($notifications as $notification) {
         $type = \core\output\notification::NOTIFY_ERROR;
         if ($notification->notificationtype === '0') {
@@ -44,7 +61,13 @@ function local_notification_before_footer() {
             $type = \core\output\notification::NOTIFY_INFO;
         }
         \core\notification::add($notification->notificationtext, $type);
+
+        $readrecord = new stdClass();
+        $readrecord->notification_id = $notification->id;
+        $readrecord->userid = $USER->id;
+        $readrecord->timeread = time();
+        $DB->insert_record('local_notification_read', $readrecord);
     }
-    // Add a notification of some kind.
+
 
 }
