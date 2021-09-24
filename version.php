@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_notification'; // Full name of the plugin (used for diagnostics).
 
-$plugin->version = 2021091001; // The current version (Date: YYYYMMDDXX).
+$plugin->version = 2021092401; // The current version (Date: YYYYMMDDXX).
 
 $plugin->requires = 2019111806; // Requires this Moodle version.
 
